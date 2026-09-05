@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#123e73" />
+  <meta name="description" content="Restaurante La Onda, Murcia. Cocina mediterránea, mariscos, arroces, pescados y carnes." />
+  <title>Restaurante La Onda | Carta</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Marcellus&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --navy:#123e73;
+  --navy2:#0d2f59;
+  --blue:#1d5c9e;
+  --sea:#5b8e8c;
+  --ivory:#f7f3e9;
+  --paper:#fffdf8;
+  --sand:#e6d7b2;
+  --wood:#a96f3c;
+  --woodDark:#704626;
+  --ink:#1b2a38;
+  --muted:#66727e;
+  --line:rgba(18,62,115,.13);
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  padding-bottom:90px;
+  font-family:"DM Sans",Arial,sans-serif;
+  color:var(--ink);
+  background:
+  linear-gradient(
+    90deg,
+    var(--woodDark) 0,
+    var(--wood) 11px,
+    var(--ivory) 11px,
+    var(--ivory) calc(100% - 11px),
+    var(--wood) calc(100% - 11px),
+    var(--woodDark) 100%
+  );
+}
+
+button{
+  font:inherit;
+}
+
+a{
+  color:inherit;
+}
+
+/* CABECERA */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:rgba(247,243,233,.94);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--line);
+}
+
+.topbar-inner{
+  width:min(100%,1100px);
+  margin:auto;
+  padding:9px 16px 8px;
+}
+
+.brand-row{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.logo{
+  width:42px;
+  height:42px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:3px solid var(--sand);
+  background:var(--navy);
+  color:white;
+  font-family:"Marcellus",serif;
+  font-size:22px;
+  box-shadow:0 4px 14px rgba(13,47,89,.16);
+}
+
+.brand{
+  flex:1;
+  min-width:0;
+}
+
+.brand strong{
+  display:block;
+  font-family:"Marcellus",serif;
+  font-size:21px;
+  font-weight:400;
+  color:var(--navy2);
+}
+
+/* IDIOMAS */
+
+.language-picker{
+  position:relative;
+  flex:none;
+}
+
+.language-button{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:8px 11px;
+  border:1px solid rgba(18,62,115,.10);
+  border-radius:999px;
+  background:rgba(255,253,248,.85);
+  color:var(--navy2);
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 3px 12px rgba(13,47,89,.04);
+}
+
+.language-current{
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.language-arrow{
+  color:var(--wood);
+  font-size:14px;
+}
+
+.flag-real{
+  width:23px;
+  height:15px;
+  display:inline-flex;
+  overflow:hidden;
+  flex:none;
+  border-radius:3px;
+  box-shadow:0 0 0 1px rgba(0,0,0,.10);
+}
+
+.flag-real svg{
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+.language-menu{
+  position:absolute;
+  top:calc(100% + 8px);
+  right:0;
+  width:172px;
+  padding:6px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.17);
+  background:
+  linear-gradient(
+    145deg,
+    rgba(13,47,89,.99),
+    rgba(29,92,158,.96) 58%,
+    rgba(91,142,140,.92)
+  );
+  box-shadow:0 18px 42px rgba(13,47,89,.30);
+
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-5px) scale(.98);
+  transform-origin:top right;
+
+  transition:
+    opacity .18s ease,
+    transform .18s ease,
+    visibility .18s ease;
+}
+
+.language-menu.open{
+  opacity:1;
+  visibility:visible;
+  transform:none;
+}
+
+.language-option{
+  width:100%;
+  display:grid;
+  grid-template-columns:28px 1fr 18px;
+  align-items:center;
+  gap:7px;
+
+  padding:9px 8px;
+  border:0;
+  border-radius:11px;
+
+  background:transparent;
+  color:rgba(255,255,255,.90);
+
+  text-align:left;
+  font-size:12px;
+  cursor:pointer;
+}
+
+.language-option:hover{
+  background:rgba(255,255,255,.10);
+}
+
+.language-option.active{
+  background:rgba(255,255,255,.14);
+  color:white;
+  font-weight:800;
+}
+
+.language-check{
+  opacity:0;
+  color:var(--sand);
+  font-weight:900;
+}
+
+.language-option.active .language-check{
+  opacity:1;
+}
+
+/* CATEGORÍAS SUPERIORES */
+
+.category-nav{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding-top:8px;
+  padding-bottom:1px;
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+}
+
+.category-nav::-webkit-scrollbar{
+  display:none;
+}
+
+.category-nav a{
+  flex:none;
+  scroll-snap-align:start;
+  padding:8px 11px;
+  border-radius:999px;
+  border:1px solid rgba(18,62,115,.10);
+  background:rgba(255,253,248,.72);
+
+  color:var(--navy);
+  text-decoration:none;
+  white-space:nowrap;
+  font-size:12px;
+  font-weight:700;
+}
+
+/* PRESENTACIÓN */
+
+.hero{
+  width:min(100%,1100px);
+  margin:auto;
+  padding:34px 22px 27px;
+  text-align:center;
+}
+
+.crest{
+  width:74px;
+  height:74px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 14px;
+
+  border-radius:50%;
+  border:1px solid rgba(18,62,115,.18);
+  background:var(--paper);
+
+  color:var(--navy);
+  font-size:31px;
+
+  box-shadow:0 14px 35px rgba(13,47,89,.08);
+}
+
+.eyebrow{
+  color:var(--wood);
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:10px;
+  font-weight:800;
+}
+
+h1{
+  margin:5px 0 8px;
+  font-family:"Marcellus",serif;
+  color:var(--navy2);
+  font-size:clamp(36px,9vw,64px);
+  font-weight:400;
+  line-height:.98;
+}
+
+.hero p{
+  max-width:600px;
+  margin:auto;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
+
+/* CARTA */
+
+main{
+  width:min(100%,980px);
+  margin:auto;
+  padding:0 14px 30px;
+}
+
+.section{
+  scroll-margin-top:130px;
+  margin-bottom:35px;
+}
+
+.section-head{
+  display:flex;
+  justify-content:center;
+  text-align:center;
+  margin-bottom:14px;
+}
+
+.section h2{
+  margin:0;
+  font-family:"Marcellus",serif;
+  color:var(--navy);
+  font-size:29px;
+  font-weight:400;
+}
+
+.menu-grid{
+  display:grid;
+  gap:10px;
+}
+
+.dish{
+  position:relative;
+  overflow:hidden;
+
+  padding:13px 12px 12px;
+
+  border:1px solid var(--line);
+  border-radius:16px;
+
+  background:rgba(255,253,248,.95);
+
+  box-shadow:0 7px 22px rgba(13,47,89,.035);
+}
+
+.dish.popular{
+  border-color:rgba(169,111,60,.45);
+  background:
+  linear-gradient(
+    115deg,
+    rgba(230,215,178,.19),
+    rgba(255,253,248,.99) 45%
+  );
+}
+
+.dish.popular::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:4px;
+  background:var(--wood);
+}
+
+.dish-top{
+  display:grid;
+  grid-template-columns:38px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:start;
+}
+
+.dish-number{
+  width:36px;
+  height:36px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:12px;
+
+  background:var(--navy);
+  color:white;
+
+  font-size:12px;
+  font-weight:800;
+}
+
+.dish-name{
+  margin-top:1px;
+  font-size:15px;
+  font-weight:700;
+  line-height:1.25;
+}
+
+.dish-sub{
+  display:block;
+  margin-top:3px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:400;
+}
+
+.price{
+  padding-top:2px;
+  color:var(--navy);
+  font-size:14px;
+  font-weight:800;
+  white-space:nowrap;
+  text-align:right;
+}
+
+.price small{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:600;
+}
+
+.dish-meta{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:5px;
+
+  margin:8px 0 0 48px;
+}
+
+.tag{
+  padding:4px 7px;
+
+  border:1px solid rgba(169,111,60,.18);
+  border-radius:999px;
+
+  background:rgba(169,111,60,.12);
+  color:#82532e;
+
+  font-size:10px;
+  font-weight:800;
+}
+
+/* ALÉRGENOS */
+
+.allergen{
+  width:26px;
+  height:26px;
+
+  display:inline-grid;
+  place-items:center;
+
+  border-radius:50%;
+  flex:none;
+}
+
+.allergen-symbol{
+  width:26px;
+  height:26px;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:50%;
+  color:white;
+
+  box-shadow:
+  inset 0 0 0 1px rgba(255,255,255,.20);
+}
+
+.allergen-symbol svg{
+  width:16px;
+  height:16px;
+
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.65;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* colores como la carta física */
+
+.allergen-gluten{background:#c85b3d}
+.allergen-crust{background:#438ab0}
+.allergen-egg{background:#d9983c}
+.allergen-fish{background:#215e99}
+.allergen-peanut{background:#9b674c}
+.allergen-soy{background:#4c8e7f}
+.allergen-milk{background:#353535}
+.allergen-nuts{background:#8d4b5b}
+.allergen-celery{background:#55a874}
+.allergen-mustard{background:#c9a137}
+.allergen-sesame{background:#6c6a67}
+.allergen-sulfites{background:#b9903b}
+.allergen-lupin{background:#d4a22d}
+.allergen-molluscs{background:#4694ae}
+
+/* INFORMACIÓN */
+
+.info-panel{
+  margin-top:38px;
+  padding:23px;
+
+  border-radius:24px;
+
+  background:var(--navy2);
+  color:white;
+
+  box-shadow:0 14px 35px rgba(13,47,89,.14);
+}
+
+.info-panel h2{
+  margin:0 0 8px;
+  font-family:"Marcellus",serif;
+  font-size:28px;
+  font-weight:400;
+}
+
+.info-panel > p{
+  margin:0 0 20px;
+  color:rgba(255,255,255,.72);
+  font-size:13px;
+}
+
+.info-list{
+  display:grid;
+  gap:10px;
+}
+
+.info-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+
+  padding:12px;
+
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:14px;
+
+  background:rgba(255,255,255,.07);
+
+  text-decoration:none;
+}
+
+.info-icon{
+  font-size:20px;
+}
+
+.info-item strong{
+  display:block;
+  font-size:13px;
+}
+
+.info-item span{
+  color:rgba(255,255,255,.72);
+  font-size:12px;
+}
+
+/* LEYENDA */
+
+.legend{
+  margin-top:25px;
+  padding:18px;
+
+  border:1px solid var(--line);
+  border-radius:20px;
+
+  background:var(--paper);
+}
+
+.legend h3{
+  margin:0 0 4px;
+
+  font-family:"Marcellus",serif;
+  color:var(--navy);
+  font-size:22px;
+  font-weight:400;
+}
+
+.legend-note{
+  margin-bottom:13px;
+
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+}
+
+.legend-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+}
+
+.legend-row{
+  display:flex;
+  align-items:center;
+  gap:7px;
+
+  font-size:11px;
+}
+
+/* BARRA INFERIOR */
+
+.floating-bar{
+  position:fixed;
+  left:50%;
+  bottom:max(10px,env(safe-area-inset-bottom));
+
+  z-index:200;
+
+  width:min(520px,calc(100% - 24px));
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+
+  padding:8px;
+
+  transform:translateX(-50%);
+
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+
+  background:rgba(13,47,89,.94);
+
+  backdrop-filter:blur(14px);
+
+  box-shadow:0 14px 38px rgba(7,27,52,.28);
+}
+
+.floating-bar a{
+  min-height:48px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  border-radius:12px;
+
+  text-decoration:none;
+
+  font-size:13px;
+  font-weight:800;
+}
+
+.call-btn{
+  background:white;
+  color:var(--navy2);
+}
+
+.map-btn{
+  background:var(--wood);
+  color:white;
+}
+
+.footer{
+  padding:25px 20px 14px;
+  text-align:center;
+  color:var(--muted);
+  font-size:10px;
+}
+
+/* ANIMACIONES */
+
+.fade{
+  opacity:0;
+  transform:translateY(8px);
+
+  transition:
+  opacity .42s ease,
+  transform .42s ease;
+}
+
+.fade.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* TABLET */
+
+@media(min-width:720px){
+
+  body{
+    background:
+    linear-gradient(
+      90deg,
+      var(--woodDark) 0,
+      var(--wood) 24px,
+      var(--ivory) 24px,
+      var(--ivory) calc(100% - 24px),
+      var(--wood) calc(100% - 24px),
+      var(--woodDark) 100%
+    );
+  }
+
+  .menu-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .legend-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+
+  .info-list{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+
+    <div class="brand-row">
+
+      <div class="logo">O</div>
+
+      <div class="brand">
+        <strong>La Onda</strong>
+      </div>
+
+      <div class="language-picker">
+
+        <button
+          id="languageButton"
+          class="language-button"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <span id="languageCurrent" class="language-current">
+            <span class="flag-real" data-flag="es"></span>
+            <span>Español</span>
+          </span>
+
+          <span class="language-arrow">⌄</span>
+        </button>
+
+        <div id="languageMenu" class="language-menu">
+
+          <button class="language-option active" data-lang="es">
+            <span class="flag-real" data-flag="es"></span>
+            <span>Español</span>
+            <span class="language-check">✓</span>
+          </button>
+
+          <button class="language-option" data-lang="en">
+            <span class="flag-real" data-flag="en"></span>
+            <span>English</span>
+            <span class="language-check">✓</span>
+          </button>
+
+          <button class="language-option" data-lang="fr">
+            <span class="flag-real" data-flag="fr"></span>
+            <span>Français</span>
+            <span class="language-check">✓</span>
+          </button>
+
+          <button class="language-option" data-lang="de">
+            <span class="flag-real" data-flag="de"></span>
+            <span>Deutsch</span>
+            <span class="language-check">✓</span>
+          </button>
+
+          <button class="language-option" data-lang="zh">
+            <span class="flag-real" data-flag="zh"></span>
+            <span>中文</span>
+            <span class="language-check">✓</span>
+          </button>
+
+        </div>
+      </div>
+
+    </div>
+
+    <nav
+      class="category-nav"
+      id="categoryNav"
+      aria-label="Categorías"
+    ></nav>
+
+  </div>
+</header>
+
+<section class="hero">
+
+  <div class="crest">⚓</div>
+
+  <div class="eyebrow" data-i18n="murciaCuisine">
+    Cocina mediterránea · Murcia
+  </div>
+
+  <h1>
+    Restaurante<br>
+    La Onda
+  </h1>
+
+  <p data-i18n="heroText">
+    Producto, mar y cocina tradicional murciana en una carta pensada para disfrutar sin prisa.
+  </p>
+
+</section>
+
+<main id="menu"></main>
+
+<footer class="footer">
+  <div>Restaurante La Onda · Murcia</div>
+</footer>
+
+<div class="floating-bar">
+
+  <a
+    class="call-btn"
+    href="tel:+34968247882"
+  >
+    ☎
+    <span data-i18n="call">Llamar</span>
+  </a>
+
+  <a
+    class="map-btn"
+    href="https://www.google.com/maps/search/?api=1&query=Restaurante%20La%20Onda%2C%20C.%20Bando%20de%20la%20Huerta%2C%20s%2Fn%2C%2030008%20Murcia"
+    target="_blank"
+    rel="noopener"
+  >
+    📍
+    <span data-i18n="directions">Cómo llegar</span>
+  </a>
+
+</div>
+
+<script>
+
+/* ================================
+   ALÉRGENOS
+================================ */
+
+const allergenSVG={
+
+gluten:`
+<svg viewBox="0 0 24 24">
+<path d="M12 3v18
+M12 7c-3-1-5-3-6-5
+M12 11c-3-1-5-3-6-5
+M12 15c-3-1-5-3-6-5
+M12 7c3-1 5-3 6-5
+M12 11c3-1 5-3 6-5
+M12 15c3-1 5-3 6-5"/>
+</svg>`,
+
+crust:`
+<svg viewBox="0 0 24 24">
+<path d="M7 14c1.4 3 4.8 4.6 8 3.3
+2.2-.9 3.6-3 3.6-5.3
+M7 14c-1.8-.3-3.2-1.5-3.6-3.1
+M8 11c.2-2.2 2-4 4.3-4
+2.6 0 4.7 2.1 4.7 4.7
+M6 8 3 6
+M18 8l3-2"/>
+</svg>`,
+
+egg:`
+<svg viewBox="0 0 24 24">
+<path d="M12 3c3.5 0 6 5.8 6 10.2
+A6 6 0 0 1 6 13.2
+C6 8.8 8.5 3 12 3Z"/>
+</svg>`,
+
+fish:`
+<svg viewBox="0 0 24 24">
+<path d="M4 12c3-4 7-6 11-4.8
+1.8.6 3.4 1.8 4.5 3.4
+L22 8v8l-2.5-2.6
+C18.4 15 16.8 16.2 15 16.8
+11 18 7 16 4 12Z"/>
+</svg>`,
+
+peanut:`
+<svg viewBox="0 0 24 24">
+<path d="M9.5 4.2c2.2-.7 3.9 1.4 3.6 3.3
+-.2 1.2.4 2.2 1.6 2.8
+2 1 2.4 3.9.7 5.4
+-1.3 1.2-3.1 1.1-4.2.1
+-1-.9-2-1-3.2-.4
+-2 .9-4.2-.7-4-2.9
+.1-1.5 1-2.5 2.1-3.1
+1.1-.6 1.5-1.4 1.2-2.6
+-.3-1.1.5-2.2 2.2-2.6Z"/>
+</svg>`,
+
+soy:`
+<svg viewBox="0 0 24 24">
+<path d="M6 19c1-7 5-12 12-14
+-1 7-5 12-12 14Z
+M8 17c3-2 6-5 8-9"/>
+</svg>`,
+
+milk:`
+<svg viewBox="0 0 24 24">
+<path d="M9 4h6l1 3v12H8V7l1-3Z
+M9 7h7"/>
+</svg>`,
+
+nuts:`
+<svg viewBox="0 0 24 24">
+<path d="M12 3c4 0 7 3 7 7
+0 5-3 9-7 11
+-4-2-7-6-7-11
+0-4 3-7 7-7Z
+M12 6v12"/>
+</svg>`,
+
+celery:`
+<svg viewBox="0 0 24 24">
+<path d="M9 21V9
+M12 21V7
+M15 21V9
+M12 8c-3-1-4-3-4-5
+M12 8c3-1 4-3 4-5"/>
+</svg>`,
+
+mustard:`
+<svg viewBox="0 0 24 24">
+<path d="M8 21c0-5 1.6-9 4-12
+2.4 3 4 7 4 12H8Z
+M12 9V3"/>
+</svg>`,
+
+sesame:`
+<svg viewBox="0 0 24 24">
+<ellipse cx="8" cy="8" rx="2" ry="3"/>
+<ellipse cx="15.5" cy="7" rx="2" ry="3"/>
+<ellipse cx="11" cy="15.5" rx="2" ry="3"/>
+</svg>`,
+
+sulfites:`
+<svg viewBox="0 0 24 24">
+<path d="M9 3h6
+M10 3v5l-4 7
+c-1.3 2.3.4 5 3 5h6
+c2.6 0 4.3-2.7 3-5l-4-7V3"/>
+</svg>`,
+
+lupin:`
+<svg viewBox="0 0 24 24">
+<path d="M12 21V5
+M12 7c-3 0-5-1.5-6-4
+M12 11c-3 0-5-1.3-6-3.5
+M12 15c3 0 5-1.3 6-3.5"/>
+</svg>`,
+
+molluscs:`
+<svg viewBox="0 0 24 24">
+<path d="M4 18c0-7 3.5-12 8-12
+s8 5 8 12H4Z
+M12 6v12
+M8 7.5l2 10.5
+M16 7.5 14 18"/>
+</svg>`
+};
+
+function allergenIcon(key){
+  return `
+  <span class="allergen-symbol allergen-${key}">
+    ${allergenSVG[key]}
+  </span>`;
+}
+
+/* ================================
+   CATEGORÍAS
+================================ */
+
+const categories=[
+["aperitivos","Aperitivos"],
+["mariscos","Mariscos"],
+["arroces","Arroces"],
+["entrantes","Entrantes"],
+["verduras","Ensaladas, sopas y verduras"],
+["guisos","Guisos y huevos"],
+["pescados","Pescados"],
+["carne","Carnes"],
+["montaditos","Montaditos"],
+["postres","Postres"]
+];
+
+/* ================================
+   PLATOS
+================================ */
+
+const dishes=[
+
+/* APERITIVOS */
+
+["aperitivos","Anchoa en salmuera","3,20 €",["fish"]],
+["aperitivos","Matrimonio","3,20 €",["fish"]],
+["aperitivos","Bicicleta","2,50 €",["gluten","egg","fish"]],
+["aperitivos","Marinera con anchoa","2,80 €",["gluten","egg","fish"]],
+["aperitivos","Marinero con boquerón","2,80 €",["gluten","egg","fish"]],
+["aperitivos","Ensaladilla rusa","5,50 €",["egg","fish"]],
+["aperitivos","Almendras","2,50 €",["nuts"]],
+["aperitivos","Aceitunas","2,00 €",[]],
+["aperitivos","Hueva","3,40 €",["fish"]],
+["aperitivos","Mojama","3,20 €",["fish"]],
+["aperitivos","Lata de berberechos","13,50 €",["molluscs"]],
+["aperitivos","Lata de mejillones","10,50 €",["molluscs"]],
+["aperitivos","Lata de navajas","14,50 €",["molluscs"]],
+["aperitivos","Canapé de salmón","4,00 €",["gluten","fish"]],
+["aperitivos","Pulpo","4,20 €",["molluscs"]],
+["aperitivos","Caballitos","2,50 €",["gluten","crust","egg"]],
+["aperitivos","Tigres","2,80 €",["gluten","milk","molluscs"]],
+["aperitivos","Buñuelos de bacalao","2,50 €",["gluten","egg","fish"]],
+["aperitivos","Croquetas de jamón","2,40 €",["gluten","egg","milk"]],
+["aperitivos","Champiñón al ajillo o plancha","8,50 €",[]],
+["aperitivos","Foie a la plancha con pan de cristal","16,50 €",["gluten"]],
+
+/* MARISCOS */
+
+["mariscos","Ostras","5,50 €",["molluscs"],"","unidad"],
+["mariscos","Almeja de Carril","23,00 €",["molluscs"],"","100 g"],
+["mariscos","Almeja chirla","8,50 €",["molluscs"],"","100 g"],
+["mariscos","Coquinas","9,00 €",["molluscs"],"","100 g"],
+["mariscos","Berberechos","8,50 €",["molluscs"],"","100 g"],
+["mariscos","Zamburiñas","4,50 €",["molluscs"],"","unidad"],
+["mariscos","Mejillones al vapor","12,00 €",["molluscs"]],
+["mariscos","Calamar fresco / de potera","7,50 €",["molluscs"],"popular","100 g"],
+["mariscos","Quisquilla","18,00 €",["crust"],"","100 g"],
+["mariscos","Cigala","18,50 €",["crust"],"","100 g"],
+["mariscos","Gamba blanca hervida","16,00 €",["crust"],"popular","100 g"],
+["mariscos","Gamba roja","27,00 €",["crust"],"","100 g"],
+
+/* ARROCES */
+
+["arroces","Arroz a banda","19,00 €",["fish","molluscs"],"","persona · mín. 2"],
+["arroces","Arroz caldero","19,00 €",["fish"],"","persona · mín. 2"],
+["arroces","Arroz de marisco","22,00 €",["crust","fish","molluscs"],"","persona · mín. 2"],
+["arroces","Arroz y conejo","18,00 €",[],"","persona · mín. 2"],
+["arroces","Arroz de verduras y pollo","17,00 €",["celery"],"","persona · mín. 2"],
+
+/* ENTRANTES */
+
+["entrantes","Alcachofas con huevos","11,50 €",["egg"]],
+["entrantes","Alcachofas con foie","15,50 €",[]],
+["entrantes","Anchoas con pan de cristal","12,50 €",["gluten","fish"]],
+["entrantes","Bonito escabechado","12,00 €",["fish","sulfites"]],
+["entrantes","Calamar nacional","19,50 €",["molluscs"]],
+["entrantes","Calamar a la plancha con champiñón","18,50 €",["molluscs"]],
+["entrantes","Crujiente de alcachofa","10,50 €",["gluten"]],
+["entrantes","Chipirón frito o al ajillo","14,00 €",["gluten","molluscs"]],
+["entrantes","Gambas al ajillo","18,00 €",["crust"]],
+["entrantes","Salmón con bonito en escabeche","15,50 €",["fish","sulfites"]],
+["entrantes","Salmón al eneldo","15,00 €",["fish"]],
+["entrantes","Champiñón relleno de ibérico","10,50 €",[]],
+["entrantes","Embutidos variados","14,00 €",[]],
+["entrantes","Caña de lomo de Jabugo","14,50 €",[]],
+["entrantes","Jamón de Jabugo","22,00 €",[]],
+["entrantes","Quesos variados","14,00 €",["milk"]],
+
+/* VERDURAS */
+
+["verduras","Caldo de pavo con pelotas","7,50 €",["gluten","egg","celery"]],
+["verduras","Sopa de pescado o marisco","12,50 €",["crust","fish","molluscs","celery"]],
+["verduras","Ensalada mixta","10,00 €",["egg","fish"]],
+["verduras","Tomate partido con bonito","12,50 €",["fish"]],
+["verduras","Tomate y lechuga perdiz","9,50 €",[]],
+["verduras","Tomate con ventresca","14,50 €",["fish"]],
+["verduras","Berenjenas a la crema","11,50 €",["gluten","milk"]],
+["verduras","Champiñón a la plancha o ajillo","8,50 €",[]],
+["verduras","Habas salteadas a la murciana","10,50 €",[]],
+["verduras","Habas tiernas","9,00 €",[]],
+["verduras","Panaché de verduras con jamón","12,00 €",["celery"]],
+["verduras","Pastel de puerros con gambas","13,50 €",["gluten","crust","egg","milk"]],
+
+/* GUISOS */
+
+["guisos","Guiso del día","12,50 €",[]],
+["guisos","Huevos con patatas","10,00 €",["egg"]],
+["guisos","Huevos revueltos Onda","12,00 €",["egg"]],
+["guisos","Tortilla de espárragos","10,50 €",["egg"]],
+["guisos","Tortilla de gambas","13,50 €",["crust","egg"]],
+["guisos","Tortilla de jamón o chorizo","11,50 €",["egg"]],
+
+/* PESCADOS */
+
+["pescados","Atún de ijada","19,50 €",["fish"]],
+["pescados","Chirrete frito","14,00 €",["gluten","fish"]],
+["pescados","Cocochas a la romana o al pil-pil","22,00 €",["gluten","egg","fish"]],
+["pescados","Corvina a la murciana","21,00 €",["fish"]],
+["pescados","Dorada a la sal","22,00 €",["fish"]],
+["pescados","Gallo Pedro frito","S/M",["gluten","fish"]],
+["pescados","Lenguado a la plancha o meunière","24,00 €",["gluten","fish","milk"]],
+["pescados","Lubina al ajo pescador","23,00 €",["fish"]],
+["pescados","Merluza a la plancha o romana","21,00 €",["gluten","egg","fish"]],
+["pescados","Merluza en salsa verde","22,00 €",["fish"]],
+["pescados","Mero a la cazuela o plancha","S/M",["fish"]],
+["pescados","Rape a la marinera","25,00 €",["crust","fish","molluscs"]],
+["pescados","Rodaballo al horno o plancha","S/M",["fish"]],
+
+/* CARNES */
+
+["carne","Entrecot","26,00 €",[]],
+["carne","Solomillo a la pimienta o roquefort","27,00 €",["milk"]],
+["carne","Solomillo a la brasa o foie y PX","29,00 €",["sulfites"]],
+["carne","Paletilla de cabrito al horno","25,00 €",[]],
+["carne","Chuletas de cabrito a la plancha","21,00 €",[]],
+["carne","Chuletón a la brasa","58,00 €",[],"popular","kg"],
+["carne","Cochinillo al horno","24,00 €",[]],
+["carne","Brocheta de solomillo al Jerez","23,00 €",["sulfites"]],
+["carne","Lechazo de cabrito","24,00 €",[]],
+["carne","Pluma ibérica a la parrilla","22,00 €",[]],
+["carne","Solomillo tártaro","24,00 €",["egg","mustard"]],
+["carne","Escalope milanesa","17,50 €",["gluten","egg"]],
+["carne","Rabo de toro en su jugo","19,50 €",["celery","sulfites"]],
+["carne","Lomo de cerdo con setas","16,50 €",[]],
+["carne","Pechuga de pollo a la plancha","14,00 €",[]],
+
+/* MONTADITOS */
+
+["montaditos","Montadito de lomo","4,00 €",["gluten"]],
+["montaditos","Montadito de ternera","4,50 €",["gluten"]],
+["montaditos","Montadito de solomillo","5,00 €",["gluten"]],
+["montaditos","Montadito de solomillo y foie","6,00 €",["gluten"]],
+
+/* POSTRES */
+
+["postres","Fruta","4,00 €",[]],
+["postres","Sorbetes","4,50 €",[]],
+["postres","Fresas con nata","5,50 €",["milk"]],
+["postres","Helado","4,50 €",["milk"]],
+["postres","Arroz con leche","5,00 €",["milk"]],
+["postres","Natillas","5,00 €",["egg","milk"]],
+["postres","Soufflé con helado","6,50 €",["gluten","egg","milk"]],
+["postres","Leche frita con helado","6,50 €",["gluten","egg","milk"]],
+["postres","Milhoja con crema o chocolate","6,50 €",["gluten","egg","milk"]],
+["postres","Tarta de chocolate","6,00 €",["gluten","egg","milk"]],
+["postres","Tarta de la abuela","6,00 €",["gluten","egg","milk"]],
+["postres","Tarta de manzana","5,50 €",["gluten","egg","milk"]],
+["postres","Tarta de queso","6,00 €",["gluten","egg","milk"]],
+["postres","Tarta de turrón","6,00 €",["egg","milk","nuts"]],
+["postres","Teja con helado y chocolate","6,50 €",["gluten","egg","milk","nuts"]],
+["postres","Tocino de cielo","5,50 €",["egg"]],
+["postres","Pastel de frutas","6,00 €",["gluten","egg","milk"]]
+
+];
+
+/* ================================
+   TEXTOS GENERALES
+================================ */
+
+const ui={
+
+es:{
+murciaCuisine:"Cocina mediterránea · Murcia",
+heroText:"Producto, mar y cocina tradicional murciana en una carta pensada para disfrutar sin prisa.",
+popular:"Popular",
+info:"Información",
+about:"Cocina mediterránea, producto fresco y especialidades tradicionales.",
+address:"Dirección",
+hours:"Horario",
+phone:"Teléfono",
+call:"Llamar",
+directions:"Cómo llegar",
+allergens:"Leyenda de alérgenos",
+allergenNote:"En caso de alergia o intolerancia, informe siempre al personal antes de pedir. Puede haber trazas por manipulación en cocina.",
+schedule:"Mar–Sáb 09:00–16:30 · 20:00–23:00 · Dom 09:00–14:30 · Lun cerrado"
+},
+
+en:{
+murciaCuisine:"Mediterranean cuisine · Murcia",
+heroText:"Fresh produce, sea flavours and traditional Murcian cooking, made to be enjoyed at an easy pace.",
+popular:"Popular",
+info:"Information",
+about:"Mediterranean cuisine, fresh produce and traditional specialities.",
+address:"Address",
+hours:"Opening hours",
+phone:"Phone",
+call:"Call",
+directions:"Directions",
+allergens:"Allergen key",
+allergenNote:"If you have any allergy or intolerance, always inform our staff before ordering. Traces may occur during kitchen handling.",
+schedule:"Tue–Sat 09:00–16:30 · 20:00–23:00 · Sun 09:00–14:30 · Mon closed"
+},
+
+fr:{
+murciaCuisine:"Cuisine méditerranéenne · Murcie",
+heroText:"Produits frais, saveurs de la mer et cuisine murcienne traditionnelle à savourer tranquillement.",
+popular:"Populaire",
+info:"Informations",
+about:"Cuisine méditerranéenne, produits frais et spécialités traditionnelles.",
+address:"Adresse",
+hours:"Horaires",
+phone:"Téléphone",
+call:"Appeler",
+directions:"Itinéraire",
+allergens:"Légende des allergènes",
+allergenNote:"En cas d’allergie ou d’intolérance, prévenez toujours le personnel avant de commander.",
+schedule:"Mar–Sam 09:00–16:30 · 20:00–23:00 · Dim 09:00–14:30 · Lun fermé"
+},
+
+de:{
+murciaCuisine:"Mediterrane Küche · Murcia",
+heroText:"Frische Produkte, Aromen des Meeres und traditionelle Küche aus Murcia – zum entspannten Genießen.",
+popular:"Beliebt",
+info:"Information",
+about:"Mediterrane Küche, frische Produkte und traditionelle Spezialitäten.",
+address:"Adresse",
+hours:"Öffnungszeiten",
+phone:"Telefon",
+call:"Anrufen",
+directions:"Route",
+allergens:"Allergen-Legende",
+allergenNote:"Bei Allergien oder Unverträglichkeiten informieren Sie bitte vor der Bestellung das Personal.",
+schedule:"Di–Sa 09:00–16:30 · 20:00–23:00 · So 09:00–14:30 · Mo geschlossen"
+},
+
+zh:{
+murciaCuisine:"地中海料理 · 穆尔西亚",
+heroText:"新鲜食材、海洋风味与穆尔西亚传统料理，悠然享受每一道菜。",
+popular:"人气推荐",
+info:"餐厅信息",
+about:"地中海料理、新鲜食材与传统特色菜。",
+address:"地址",
+hours:"营业时间",
+phone:"电话",
+call:"拨打电话",
+directions:"导航",
+allergens:"过敏原图例",
+allergenNote:"如有食物过敏或不耐受，请在点餐前告知工作人员。",
+schedule:"周二至周六 09:00–16:30 · 20:00–23:00 · 周日 09:00–14:30 · 周一休息"
+}
+
+};
+
+/* ================================
+   CATEGORÍAS POR IDIOMA
+================================ */
+
+const catT={
+
+es:{
+aperitivos:"Aperitivos",
+mariscos:"Mariscos",
+arroces:"Arroces",
+entrantes:"Entrantes",
+verduras:"Ensaladas, sopas y verduras",
+guisos:"Guisos y huevos",
+pescados:"Pescados",
+carne:"Carnes",
+montaditos:"Montaditos",
+postres:"Postres"
+},
+
+en:{
+aperitivos:"Appetisers",
+mariscos:"Seafood",
+arroces:"Rice dishes",
+entrantes:"Starters",
+verduras:"Salads, soups & vegetables",
+guisos:"Stews & eggs",
+pescados:"Fish",
+carne:"Meat",
+montaditos:"Mini sandwiches",
+postres:"Desserts"
+},
+
+fr:{
+aperitivos:"Apéritifs",
+mariscos:"Fruits de mer",
+arroces:"Riz",
+entrantes:"Entrées",
+verduras:"Salades, soupes & légumes",
+guisos:"Plats mijotés & œufs",
+pescados:"Poissons",
+carne:"Viandes",
+montaditos:"Montaditos",
+postres:"Desserts"
+},
+
+de:{
+aperitivos:"Appetithappen",
+mariscos:"Meeresfrüchte",
+arroces:"Reisgerichte",
+entrantes:"Vorspeisen",
+verduras:"Salate, Suppen & Gemüse",
+guisos:"Eintöpfe & Eier",
+pescados:"Fisch",
+carne:"Fleisch",
+montaditos:"Kleine Sandwiches",
+postres:"Desserts"
+},
+
+zh:{
+aperitivos:"开胃小吃",
+mariscos:"海鲜",
+arroces:"米饭料理",
+entrantes:"前菜",
+verduras:"沙拉、汤与蔬菜",
+guisos:"炖菜与鸡蛋",
+pescados:"鱼类",
+carne:"肉类",
+montaditos:"迷你三明治",
+postres:"甜点"
+}
+
+};
+
+/* ================================
+   TRADUCCIONES DE PLATOS
+================================ */
+
+const dishT={
+
+en:{
+"Chuletón a la brasa":"Charcoal-grilled rib steak",
+"Calamar fresco / de potera":"Fresh line-caught squid",
+"Gamba blanca hervida":"Boiled white prawn",
+"Arroz a banda":"A banda rice",
+"Arroz caldero":"Caldero rice",
+"Arroz de marisco":"Seafood rice",
+"Arroz y conejo":"Rice with rabbit",
+"Arroz de verduras y pollo":"Vegetable & chicken rice",
+"Ostras":"Oysters",
+"Almeja de Carril":"Carril clams",
+"Almeja chirla":"Small clams",
+"Coquinas":"Wedge clams",
+"Berberechos":"Cockles",
+"Zamburiñas":"Scallops",
+"Mejillones al vapor":"Steamed mussels",
+"Quisquilla":"Local shrimp",
+"Cigala":"Langoustine",
+"Gamba roja":"Red prawn",
+"Entrecot":"Entrecôte",
+"Tarta de queso":"Cheesecake",
+"Jamón de Jabugo":"Jabugo ham",
+"Quesos variados":"Assorted cheeses",
+"Ensalada mixta":"Mixed salad",
+"Tomate con ventresca":"Tomato with tuna belly"
+},
+
+fr:{
+"Chuletón a la brasa":"Côte de bœuf grillée",
+"Calamar fresco / de potera":"Calamar frais de ligne",
+"Gamba blanca hervida":"Crevette blanche bouillie",
+"Arroz a banda":"Riz a banda",
+"Arroz caldero":"Riz caldero",
+"Arroz de marisco":"Riz aux fruits de mer",
+"Arroz y conejo":"Riz au lapin",
+"Arroz de verduras y pollo":"Riz aux légumes et poulet",
+"Ostras":"Huîtres",
+"Almeja de Carril":"Palourdes de Carril",
+"Coquinas":"Tellines",
+"Berberechos":"Coques",
+"Mejillones al vapor":"Moules vapeur",
+"Cigala":"Langoustine",
+"Gamba roja":"Crevette rouge",
+"Entrecot":"Entrecôte",
+"Tarta de queso":"Gâteau au fromage",
+"Jamón de Jabugo":"Jambon de Jabugo"
+},
+
+de:{
+"Chuletón a la brasa":"Gegrilltes Rib-Steak",
+"Calamar fresco / de potera":"Frischer Kalmar",
+"Gamba blanca hervida":"Gekochte weiße Garnele",
+"Arroz a banda":"A-banda-Reis",
+"Arroz caldero":"Caldero-Reis",
+"Arroz de marisco":"Meeresfrüchte-Reis",
+"Arroz y conejo":"Reis mit Kaninchen",
+"Ostras":"Austern",
+"Coquinas":"Dreiecksmuscheln",
+"Berberechos":"Herzmuscheln",
+"Mejillones al vapor":"Gedämpfte Miesmuscheln",
+"Cigala":"Kaisergranat",
+"Gamba roja":"Rote Garnele",
+"Entrecot":"Entrecôte",
+"Tarta de queso":"Käsekuchen"
+},
+
+zh:{
+"Chuletón a la brasa":"炭烤大块牛排",
+"Calamar fresco / de potera":"新鲜钓捕鱿鱼",
+"Gamba blanca hervida":"水煮白虾",
+"Arroz a banda":"西班牙海鲜高汤米饭",
+"Arroz caldero":"穆尔西亚传统鱼汤米饭",
+"Arroz de marisco":"海鲜饭",
+"Arroz y conejo":"兔肉米饭",
+"Ostras":"生蚝",
+"Coquinas":"楔形蛤",
+"Berberechos":"鸟蛤",
+"Mejillones al vapor":"清蒸青口",
+"Cigala":"海螯虾",
+"Gamba roja":"红虾",
+"Entrecot":"肋眼牛排",
+"Tarta de queso":"芝士蛋糕"
+}
+
+};
+
+/* ================================
+   ALÉRGENOS POR IDIOMA
+================================ */
+
+const allergenNames={
+
+es:{
+gluten:"Gluten",
+crust:"Crustáceos",
+egg:"Huevo",
+fish:"Pescado",
+peanut:"Cacahuetes",
+soy:"Soja",
+milk:"Lácteos",
+nuts:"Frutos de cáscara",
+celery:"Apio",
+mustard:"Mostaza",
+sesame:"Sésamo",
+sulfites:"Sulfitos",
+lupin:"Altramuces",
+molluscs:"Moluscos"
+},
+
+en:{
+gluten:"Gluten",
+crust:"Crustaceans",
+egg:"Egg",
+fish:"Fish",
+peanut:"Peanuts",
+soy:"Soy",
+milk:"Milk",
+nuts:"Tree nuts",
+celery:"Celery",
+mustard:"Mustard",
+sesame:"Sesame",
+sulfites:"Sulphites",
+lupin:"Lupin",
+molluscs:"Molluscs"
+},
+
+fr:{
+gluten:"Gluten",
+crust:"Crustacés",
+egg:"Œuf",
+fish:"Poisson",
+peanut:"Arachides",
+soy:"Soja",
+milk:"Lait",
+nuts:"Fruits à coque",
+celery:"Céleri",
+mustard:"Moutarde",
+sesame:"Sésame",
+sulfites:"Sulfites",
+lupin:"Lupin",
+molluscs:"Mollusques"
+},
+
+de:{
+gluten:"Gluten",
+crust:"Krebstiere",
+egg:"Ei",
+fish:"Fisch",
+peanut:"Erdnüsse",
+soy:"Soja",
+milk:"Milch",
+nuts:"Schalenfrüchte",
+celery:"Sellerie",
+mustard:"Senf",
+sesame:"Sesam",
+sulfites:"Sulfite",
+lupin:"Lupinen",
+molluscs:"Weichtiere"
+},
+
+zh:{
+gluten:"麸质",
+crust:"甲壳类",
+egg:"鸡蛋",
+fish:"鱼类",
+peanut:"花生",
+soy:"大豆",
+milk:"乳制品",
+nuts:"坚果",
+celery:"芹菜",
+mustard:"芥末",
+sesame:"芝麻",
+sulfites:"亚硫酸盐",
+lupin:"羽扇豆",
+molluscs:"软体动物"
+}
+
+};
+
+/* ================================
+   BANDERAS SVG
+================================ */
+
+const flagSVG={
+
+es:`
+<svg viewBox="0 0 30 20">
+<rect width="30" height="20" fill="#AA151B"/>
+<rect y="5" width="30" height="10" fill="#F1BF00"/>
+</svg>`,
+
+en:`
+<svg viewBox="0 0 60 30">
+<rect width="60" height="30" fill="#012169"/>
+<path d="M0 0 60 30M60 0 0 30"
+stroke="#fff" stroke-width="6"/>
+<path d="M0 0 60 30M60 0 0 30"
+stroke="#C8102E" stroke-width="3"/>
+<path d="M30 0v30M0 15h60"
+stroke="#fff" stroke-width="10"/>
+<path d="M30 0v30M0 15h60"
+stroke="#C8102E" stroke-width="6"/>
+</svg>`,
+
+fr:`
+<svg viewBox="0 0 30 20">
+<rect width="10" height="20" fill="#0055A4"/>
+<rect x="10" width="10" height="20" fill="#fff"/>
+<rect x="20" width="10" height="20" fill="#EF4135"/>
+</svg>`,
+
+de:`
+<svg viewBox="0 0 30 20">
+<rect width="30" height="6.67" fill="#000"/>
+<rect y="6.67" width="30" height="6.67" fill="#DD0000"/>
+<rect y="13.34" width="30" height="6.66" fill="#FFCE00"/>
+</svg>`,
+
+zh:`
+<svg viewBox="0 0 30 20">
+<rect width="30" height="20" fill="#DE2910"/>
+<path
+d="m5 3 .7 2.1h2.2L6.1 6.4l.7 2.1L5 7.2 3.2 8.5l.7-2.1-1.8-1.3h2.2Z"
+fill="#FFDE00"/>
+</svg>`
+
+};
+
+const languageLabels={
+es:"Español",
+en:"English",
+fr:"Français",
+de:"Deutsch",
+zh:"中文"
+};
+
+/* ================================
+   FUNCIONES
+================================ */
+
+let currentLang="es";
+
+function translatedDish(name){
+
+  if(currentLang==="es"){
+    return name;
+  }
+
+  if(
+    dishT[currentLang] &&
+    dishT[currentLang][name]
+  ){
+    return dishT[currentLang][name];
+  }
+
+  return name;
+}
+
+function render(){
+
+  const t=ui[currentLang];
+
+  document.documentElement.lang=
+    currentLang==="zh"
+    ? "zh-CN"
+    : currentLang;
+
+  document
+  .querySelectorAll("[data-i18n]")
+  .forEach(el=>{
+
+    const key=el.dataset.i18n;
+
+    if(t[key]){
+      el.textContent=t[key];
+    }
+
+  });
+
+  /* navegación */
+
+  const nav=document.getElementById("categoryNav");
+
+  nav.innerHTML=categories
+  .map(([id])=>`
+    <a href="#${id}">
+      ${catT[currentLang][id]}
+    </a>
+  `)
+  .join("");
+
+  /* platos */
+
+  let number=1;
+
+  const menu=document.getElementById("menu");
+
+  menu.innerHTML=categories
+  .map(([id])=>{
+
+    const list=dishes.filter(
+      dish=>dish[0]===id
+    );
+
+    const cards=list
+    .map(dish=>{
+
+      const [
+        category,
+        name,
+        price,
+        allergens=[],
+        tag="",
+        unit=""
+      ]=dish;
+
+      const dishNumber=
+        String(number++)
+        .padStart(2,"0");
+
+      const translated=
+        translatedDish(name);
+
+      const spanishName=
+        currentLang!=="es" &&
+        translated!==name
+
+        ? `<span class="dish-sub">${name}</span>`
+
+        : "";
+
+      const allergenHTML=
+        allergens
+        .map(a=>`
+          <span
+            class="allergen"
+            title="${allergenNames[currentLang][a]}"
+          >
+            ${allergenIcon(a)}
+          </span>
+        `)
+        .join("");
+
+      const popular=
+        tag==="popular";
+
+      return `
+      <article class="dish fade ${popular ? "popular" : ""}">
+
+        <div class="dish-top">
+
+          <div class="dish-number">
+            ${dishNumber}
+          </div>
+
+          <div class="dish-name">
+            ${translated}
+            ${spanishName}
+          </div>
+
+          <div class="price">
+
+            ${price}
+
+            ${
+              unit
+              ? `<small>${unit}</small>`
+              : ""
+            }
+
+          </div>
+
+        </div>
+
+        ${
+          popular || allergenHTML
+
+          ? `
+          <div class="dish-meta">
+
+            ${
+              popular
+
+              ? `<span class="tag">
+                  🔥 ${t.popular}
+                </span>`
+
+              : ""
+            }
+
+            ${allergenHTML}
+
+          </div>
+          `
+
+          : ""
+        }
+
+      </article>
+      `;
+
+    })
+    .join("");
+
+    return `
+    <section
+      class="section"
+      id="${id}"
+    >
+
+      <div class="section-head">
+
+        <h2>
+          ${catT[currentLang][id]}
+        </h2>
+
+      </div>
+
+      <div class="menu-grid">
+        ${cards}
+      </div>
+
+    </section>
+    `;
+
+  })
+  .join("")
+  +
+  renderInfo(t);
+
+  activateAnimations();
+
+}
+
+/* INFORMACIÓN */
+
+function renderInfo(t){
+
+  const usedAllergens=
+    Object
+    .keys(allergenNames.es)
+    .filter(key=>
+
+      dishes.some(
+        dish=>
+        (dish[3] || [])
+        .includes(key)
+      )
+
+    );
+
+  const legend=
+    usedAllergens
+    .map(key=>`
+
+      <div class="legend-row">
+
+        <span class="allergen">
+          ${allergenIcon(key)}
+        </span>
+
+        <span>
+          ${allergenNames[currentLang][key]}
+        </span>
+
+      </div>
+
+    `)
+    .join("");
+
+  return `
+
+  <section
+    class="info-panel fade"
+    id="informacion"
+  >
+
+    <h2>
+      ${t.info}
+    </h2>
+
+    <p>
+      ${t.about}
+    </p>
+
+    <div class="info-list">
+
+      <a
+        class="info-item"
+        href="https://www.google.com/maps/search/?api=1&query=Restaurante%20La%20Onda%2C%20C.%20Bando%20de%20la%20Huerta%2C%20s%2Fn%2C%2030008%20Murcia"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <div class="info-icon">
+          📍
+        </div>
+
+        <div>
+
+          <strong>
+            ${t.address}
+          </strong>
+
+          <span>
+            C. Bando de la Huerta, s/n,
+            30008 Murcia
+          </span>
+
+        </div>
+
+      </a>
+
+      <div class="info-item">
+
+        <div class="info-icon">
+          🕒
+        </div>
+
+        <div>
+
+          <strong>
+            ${t.hours}
+          </strong>
+
+          <span>
+            ${t.schedule}
+          </span>
+
+        </div>
+
+      </div>
+
+      <a
+        class="info-item"
+        href="tel:+34968247882"
+      >
+
+        <div class="info-icon">
+          ☎
+        </div>
+
+        <div>
+
+          <strong>
+            ${t.phone}
+          </strong>
+
+          <span>
+            968 24 78 82
+          </span>
+
+        </div>
+
+      </a>
+
+    </div>
+
+  </section>
+
+  <section class="legend fade">
+
+    <h3>
+      ${t.allergens}
+    </h3>
+
+    <div class="legend-note">
+      ${t.allergenNote}
+    </div>
+
+    <div class="legend-grid">
+      ${legend}
+    </div>
+
+  </section>
+
+  `;
+
+}
+
+/* ANIMACIÓN */
+
+function activateAnimations(){
+
+  const observer=
+  new IntersectionObserver(entries=>{
+
+    entries.forEach(entry=>{
+
+      if(entry.isIntersecting){
+
+        entry.target
+        .classList
+        .add("visible");
+
+        observer
+        .unobserve(entry.target);
+
+      }
+
+    });
+
+  },{
+    threshold:.05
+  });
+
+  document
+  .querySelectorAll(".fade")
+  .forEach(el=>observer.observe(el));
+
+}
+
+/* BANDERAS INICIALES */
+
+document
+.querySelectorAll("[data-flag]")
+.forEach(el=>{
+
+  el.innerHTML=
+    flagSVG[el.dataset.flag];
+
+});
+
+/* SELECTOR DE IDIOMA */
+
+const languageButton=
+  document.getElementById("languageButton");
+
+const languageMenu=
+  document.getElementById("languageMenu");
+
+const languageCurrent=
+  document.getElementById("languageCurrent");
+
+languageButton
+.addEventListener("click",()=>{
+
+  const open=
+    languageMenu
+    .classList
+    .toggle("open");
+
+  languageButton
+  .setAttribute(
+    "aria-expanded",
+    String(open)
+  );
+
+});
+
+document
+.querySelectorAll(".language-option")
+.forEach(option=>{
+
+  option
+  .addEventListener("click",()=>{
+
+    currentLang=
+      option.dataset.lang;
+
+    languageCurrent.innerHTML=`
+
+      <span class="flag-real">
+        ${flagSVG[currentLang]}
+      </span>
+
+      <span>
+        ${languageLabels[currentLang]}
+      </span>
+
+    `;
+
+    document
+    .querySelectorAll(".language-option")
+    .forEach(button=>{
+
+      button
+      .classList
+      .toggle(
+        "active",
+        button.dataset.lang===currentLang
+      );
+
+    });
+
+    languageMenu
+    .classList
+    .remove("open");
+
+    languageButton
+    .setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    render();
+
+  });
+
+});
+
+/* CERRAR IDIOMAS AL PULSAR FUERA */
+
+document
+.addEventListener("click",event=>{
+
+  if(
+    !event.target
+    .closest(".language-picker")
+  ){
+
+    languageMenu
+    .classList
+    .remove("open");
+
+    languageButton
+    .setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+  }
+
+});
+
+/* INICIAR */
+
+render();
+
+</script>
+
+</body>
+</html>
