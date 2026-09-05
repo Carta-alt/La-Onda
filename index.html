@@ -610,45 +610,7 @@
 .dish-description{min-height:78px;margin:0;color:#44525f;font-size:14px;line-height:1.72}
 .dish-modal-allergens{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
 .dish-modal-allergens .allergen-label{display:flex;align-items:center;gap:6px;padding:6px 9px 6px 6px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.62);color:var(--muted);font-size:10px;font-weight:700}
-.premium-flash{
-  position:fixed;
-  inset:0;
-  z-index:650;
-  pointer-events:none;
-  overflow:hidden;
-  opacity:0;
-  visibility:hidden;
-}
-
-.premium-flash::after{
-  content:"";
-  position:absolute;
-  top:-20%;
-  left:-18%;
-  width:5px;
-  height:140%;
-  border-radius:999px;
-  background:#6bc2ff;
-  box-shadow:
-    0 0 7px rgba(107,194,255,.98),
-    0 0 18px rgba(29,92,158,.95),
-    0 0 38px rgba(29,92,158,.65),
-    0 0 72px rgba(107,194,255,.30);
-  transform:rotate(13deg);
-}
-
-.premium-flash.play{
-  visibility:visible;
-  opacity:1;
-}
-
-.premium-flash.play::after{
-  animation:blueReflection .58s cubic-bezier(.18,.72,.24,1) forwards;
-}
-
-@keyframes blueReflection{
-  0%{left:-18%;opacity:0}
-  12%{opacity:1}
+12%{opacity:1}
   82%{opacity:.92}
   100%{left:118%;opacity:0}
 }
@@ -720,8 +682,6 @@ body.modal-open{overflow:hidden}
     <div class="dish-modal-allergens" id="dishModalAllergens"></div>
   </div>
 </div>
-<div class="premium-flash" id="premiumFlash"></div>
-
 <div class="floating-bar">
     <a class="call-btn" href="tel:+34968247882">☎ <span data-i18n="call">Llamar</span></a>
     <a class="map-btn" href="https://www.google.com/maps/search/?api=1&query=Restaurante%20La%20Onda%2C%20C.%20Bando%20de%20la%20Huerta%2C%20s%2Fn%2C%2030008%20Murcia" target="_blank" rel="noopener">📍 <span data-i18n="directions">Cómo llegar</span></a>
@@ -1095,11 +1055,10 @@ const dishModalNumber=document.getElementById("dishModalNumber");
 const dishModalPrice=document.getElementById("dishModalPrice");
 const dishDescription=document.getElementById("dishDescription");
 const dishModalAllergens=document.getElementById("dishModalAllergens");
-const premiumFlash=document.getElementById("premiumFlash");
 let typeTimer=null;
-function playPremiumFlash(){premiumFlash.classList.remove("play");void premiumFlash.offsetWidth;premiumFlash.classList.add("play");setTimeout(()=>premiumFlash.classList.remove("play"),560)}
 function typeText(text){clearInterval(typeTimer);dishDescription.textContent="";if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){dishDescription.textContent=text;return}let i=0;typeTimer=setInterval(()=>{dishDescription.textContent+=text.charAt(i++);if(i>=text.length)clearInterval(typeTimer)},16)}
-function openDish(index){const dish=dishes[index];if(!dish)return;const[,name,price,allergens=[],tag="",unit=""]=dish;dishModalNumber.textContent=String(index+1).padStart(2,"0");dishModalTitle.textContent=dishName(name);dishModalPrice.textContent=unit?`${price==="S/M"?unitT[currentLang]["S/M"]:price} · ${unitT[currentLang][unit]||unit}`:(price==="S/M"?unitT[currentLang]["S/M"]:price);dishModalAllergens.innerHTML=allergens.map(key=>`<span class="allergen-label">${allergenIcon(key)}<span>${allergenNames[currentLang][key]}</span></span>`).join("");dishDescription.textContent="";dishModal.classList.add("open");dishModal.setAttribute("aria-hidden","false");document.body.classList.add("modal-open");playPremiumFlash();const rawDescription=(dishDescriptionsByLang[currentLang]&&dishDescriptionsByLang[currentLang][name])||dishDescriptionsByLang.es[name]||name;const localizedDescription=rawDescription.replaceAll("{DISH}",dishName(name));setTimeout(()=>typeText(localizedDescription),240)}
+function openDish(index){const dish=dishes[index];if(!dish)return;const[,name,price,allergens=[],tag="",unit=""]=dish;dishModalNumber.textContent=String(index+1).padStart(2,"0");dishModalTitle.textContent=dishName(name);dishModalPrice.textContent=unit?`${price==="S/M"?unitT[currentLang]["S/M"]:price} · ${unitT[currentLang][unit]||unit}`:(price==="S/M"?unitT[currentLang]["S/M"]:price);dishModalAllergens.innerHTML=allergens.map(key=>`<span class="allergen-label">${allergenIcon(key)}<span>${allergenNames[currentLang][key]}</span></span>`).join("");dishDescription.textContent="";dishModal.classList.add("open");dishModal.setAttribute("aria-hidden","false");document.body.classList.add("modal-open");
+const rawDescription=(dishDescriptionsByLang[currentLang]&&dishDescriptionsByLang[currentLang][name])||dishDescriptionsByLang.es[name]||name;const localizedDescription=rawDescription.replaceAll("{DISH}",dishName(name));setTimeout(()=>typeText(localizedDescription),240)}
 function closeDish(){clearInterval(typeTimer);dishModal.classList.remove("open");dishModal.setAttribute("aria-hidden","true");document.body.classList.remove("modal-open")}
 document.addEventListener("click",e=>{const card=e.target.closest(".dish[data-dish-index]");if(card)openDish(Number(card.dataset.dishIndex));if(e.target===dishModal||e.target.closest("#dishClose"))closeDish()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&dishModal.classList.contains("open"))closeDish();if((e.key==="Enter"||e.key===" ")&&document.activeElement?.matches(".dish[data-dish-index]")){e.preventDefault();openDish(Number(document.activeElement.dataset.dishIndex))}});
